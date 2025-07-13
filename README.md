@@ -109,13 +109,6 @@ flutter run
 
  ---
 
- ## 🔐 License & Ownership
- 
-This project is a custom-built solution for Mr. Mohamed El-Masry and is not open for commercial redistribution.
-The platform may be extended in the future to serve other educators under a SaaS model.
-
----
-
 ## 👨‍💻 Developer
 
 Developed by:
