@@ -60,7 +60,7 @@ lib/
 ├── main.dart           # Application entry point
 ```
 
-##👥 User Types
+## 👥 User Types
 
 ### 🧑‍🏫 Teacher (Admin)
 
