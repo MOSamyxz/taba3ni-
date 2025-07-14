@@ -9,8 +9,6 @@ The app streamlines group management, tracks student attendance, monitors monthl
 [![Dart](https://img.shields.io/badge/Dart-Language-0175C2.svg?logo=dart&logoColor=white)](https://dart.dev/)
 [![Supabase](https://img.shields.io/badge/Supabase-Backend-3FCF8E.svg?logo=supabase&logoColor=white)](https://supabase.com/)
 
-*An advanced Smart Home automation system integrating IoT sensors, real-time monitoring, device control, and blockchain-secured transaction logging.*
-
 </div>
 
 ---
