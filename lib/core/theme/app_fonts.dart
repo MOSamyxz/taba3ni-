@@ -1,5 +1,7 @@
-// lib/core/theme/app_fonts.dart
+import 'package:google_fonts/google_fonts.dart';
 
 class AppFonts {
-  static const String primaryFont = 'Cairo'; // تأكد إن الخط مضاف في pubspec.yaml
-}
+  static final poppins = GoogleFonts.dmSans();
+  static final cairo = GoogleFonts.cairo();
+  }
+

@@ -2,14 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:taba3ni/core/constants/app_colors.dart';
-import 'package:taba3ni/core/theme/app_fonts.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.lightBackground,
     primaryColor: AppColors.pYellow,
-    fontFamily: AppFonts.primaryFont,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.pYellow,
       foregroundColor: AppColors.lightTextPrimary,
@@ -37,7 +35,6 @@ class AppTheme {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.darkBackground,
     primaryColor: AppColors.pYellow,
-    fontFamily: AppFonts.primaryFont,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.darkBackground,
       foregroundColor: AppColors.darkTextPrimary,
