@@ -1,29 +1,30 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorageService {
-  final SharedPreferences _prefs;
+  final SharedPreferences prefs;
 
-  LocalStorageService(this._prefs);
+  LocalStorageService(this.prefs);
 
-  Future<void> saveToken(String token) async {
-    await _prefs.setString('token', token);
+  Future<void> saveUser({
+    required String id,
+    required String type, // 'teacher' or 'parent'
+    required String name,
+  }) async {
+    await prefs.setString('user_id', id);
+    await prefs.setString('user_type', type);
+    await prefs.setString('user_name', name);
   }
 
-  String? getToken() {
-    return _prefs.getString('token');
+  String? getUserId() => prefs.getString('user_id');
+  String? getUserType() => prefs.getString('user_type');
+  String? getUserName() => prefs.getString('user_name');
+
+  Future<void> clearUser() async {
+    await prefs.remove('user_id');
+    await prefs.remove('user_type');
+    await prefs.remove('user_name');
   }
 
-  Future<void> removeToken() async {
-    await _prefs.remove('token');
-  }
-
-  Future<void> saveLangCode(String code) async {
-    await _prefs.setString('lang_code', code);
-  }
-
-  String? getLangCode() => _prefs.getString('lang_code');
-
-  Future<void> clearAll() async {
-    await _prefs.clear();
-  }
+  bool isLoggedIn() => prefs.containsKey('user_id');
 }
+

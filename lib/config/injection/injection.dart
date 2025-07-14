@@ -44,6 +44,6 @@ Future<void> init() async {
   sl.registerFactory(() => LoginParentUseCase(sl()));
   sl.registerFactory(() => LogoutUseCase(sl()));
   sl.registerFactory(
-    () => AuthCubit(loginTeacher: sl(), loginParent: sl(), logout: sl()),
+    () => AuthCubit(loginTeacher: sl(), loginParent: sl(), logout: sl() , localStorage: sl()),
   );
 }

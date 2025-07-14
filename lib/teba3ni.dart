@@ -26,7 +26,7 @@ class Taba3ni extends StatelessWidget {
   ],
       theme: AppTheme.darkTheme, // Use dark theme for the app
       onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: AppRoutes.userTypeSelector,
+      initialRoute: AppRoutes.authGate,
     );
   }
 }

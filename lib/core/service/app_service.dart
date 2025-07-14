@@ -38,13 +38,14 @@ class AppService {
   }
 
   /// تحقق من وجود مستخدم مخزن
-  Future<void> _checkUserAuth() async {
-    final token = localStorage.getToken();
-    if (token != null && token.isNotEmpty) {
-      debugPrint('🔐 مستخدم مسجل مسبقًا');
-      // TODO: استدعاء بيانات المستخدم من Supabase
-    } else {
-      debugPrint('🔓 لا يوجد مستخدم مخزن');
-    }
+ Future<void> _checkUserAuth() async {
+  final userId = localStorage.getUserId();
+  final userType = localStorage.getUserType();
+  if (userId != null && userType != null) {
+    debugPrint('🔐 User is logged in as $userType');
+  } else {
+    debugPrint('🔓 No user logged in');
   }
+}
+
 }
