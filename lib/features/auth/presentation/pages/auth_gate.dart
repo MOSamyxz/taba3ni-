@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taba3ni/config/injection/injection.dart';
 import 'package:taba3ni/config/routes/app_routes.dart';
 import 'package:taba3ni/core/service/local_storage_service.dart';
@@ -23,12 +24,12 @@ class _AuthGateState extends State<AuthGate> {
     final localStorage = sl<LocalStorageService>();
 
     if (!localStorage.isLoggedIn()) {
-      Navigator.pushReplacementNamed(context, AppRoutes.userTypeSelector);
+      context.go(AppRoutes.userTypeSelector);
     } else {
       if (localStorage.getUserType() == 'teacher') {
-        Navigator.pushReplacementNamed(context, AppRoutes.homeTeacher);
+        context.go(AppRoutes.homeTeacher);
       } else {
-        Navigator.pushReplacementNamed(context, AppRoutes.homeParent);
+        context.go(AppRoutes.homeParent);
       }
     }
   }
