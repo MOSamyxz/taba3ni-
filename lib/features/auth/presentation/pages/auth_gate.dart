@@ -19,7 +19,7 @@ class _AuthGateState extends State<AuthGate> {
   }
 
   Future<void> _checkUser() async {
-    await Future.delayed(const Duration(milliseconds: 500)); // خفة وانتقال لطيف
+    await Future.delayed(const Duration(milliseconds: 500));
     if (!mounted) return;
     final localStorage = sl<LocalStorageService>();
 
@@ -27,7 +27,7 @@ class _AuthGateState extends State<AuthGate> {
       context.go(AppRoutes.userTypeSelector);
     } else {
       if (localStorage.getUserType() == 'teacher') {
-        context.go(AppRoutes.homeTeacher);
+        context.go(AppRoutes.groupPage);
       } else {
         context.go(AppRoutes.homeParent);
       }

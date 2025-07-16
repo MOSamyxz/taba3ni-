@@ -13,7 +13,6 @@ class AddGroupEntity {
 }
 
 
-// lib/features/groups/domain/entities/schedule_entry.dart
 
 class ScheduleEntry {
   final String day;

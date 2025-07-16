@@ -58,7 +58,7 @@ class GroupPage extends StatelessWidget {
                       subtitle: Text('عدد أيام ${group.schedule.length}'),
                       trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
-                        // TODO: Navigate to GroupDetailsPage(group.id)
+                        context.push(AppRoutes.groupDetails, extra: group.id);
                       },
                     ),
                   );
