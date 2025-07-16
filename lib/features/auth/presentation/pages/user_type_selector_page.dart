@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taba3ni/config/routes/app_routes.dart';
 import 'package:taba3ni/core/constants/app_colors.dart';
 import 'package:taba3ni/core/constants/app_size.dart';
@@ -17,14 +18,14 @@ class UserTypeSelectorPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustomSqIconTextButton(
-                onTap: () => Navigator.pushNamed(context, AppRoutes.teacherLogin),
+                onTap: () => context.push(AppRoutes.teacherLogin),
                 title: 'أنا مدرس',
                 icon: Icons.school,
                 color: AppColors.pYellow,
               ),
               AppSize.verticalSpace(16),
               CustomSqIconTextButton(
-                onTap: () => Navigator.pushNamed(context, AppRoutes.parentLogin),
+                onTap: () => context.push(AppRoutes.parentLogin),
                 title: 'أنا ولي أمر',
                 icon: Icons.family_restroom,
                 color: AppColors.pGreen,

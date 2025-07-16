@@ -7,6 +7,7 @@ class AppRoutes {
   static const String parentLogin = '/parentlogin';
   static const String homeTeacher = '/homeTeacher';
   static const String homeParent = '/homeParent';
-
+  static const String groupPage = '/groupPage';
+  static const String addGroup = '/addGroup';
   // Add more as you build
 }

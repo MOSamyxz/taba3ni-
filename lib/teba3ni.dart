@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taba3ni/config/routes/app_router.dart';
-import 'package:taba3ni/config/routes/app_routes.dart';
 import 'package:taba3ni/core/theme/app_theme.dart';
 
 class Taba3ni extends StatelessWidget {
@@ -11,7 +10,7 @@ class Taba3ni extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Taba3ni',
       debugShowCheckedModeBanner: false,
       locale: const Locale('ar', 'EG'), // Set Arabic locale
@@ -25,8 +24,7 @@ class Taba3ni extends StatelessWidget {
     GlobalCupertinoLocalizations.delegate,
   ],
       theme: AppTheme.darkTheme, // Use dark theme for the app
-      onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: AppRoutes.authGate,
+    routerConfig: appRouter,
     );
   }
 }
