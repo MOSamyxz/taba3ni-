@@ -22,10 +22,10 @@ class GroupLoaded extends GroupState {
 }
 
 class GroupError extends GroupState {
-  final String message;
+  final String error;
 
-  const GroupError(this.message);
+  const GroupError(this.error);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [error];
 }

@@ -1,4 +1,4 @@
-import 'package:taba3ni/features/groups/domain/entity/group_entity.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/groups/domain/repository/group_repository.dart';
 
 

@@ -1,7 +1,7 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:taba3ni/features/groups/domain/entity/group_entity.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/groups/domain/usecase/delete_group_usecase.dart';
 import 'package:taba3ni/features/groups/domain/usecase/get_groups_usecase.dart';
 
