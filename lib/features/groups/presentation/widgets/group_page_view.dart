@@ -47,14 +47,16 @@ class GroupPageView extends StatelessWidget {
                     create: (context) => sl<AuthCubit>(),
                     child: BlocConsumer<AuthCubit, AuthState>(
                       listener: (context, state) {
-if(state is AuthLogOut){context.go(AppRoutes.authGate);}
+                        if (state is AuthLogOut) {
+                          context.go(AppRoutes.authGate);
+                        }
                       },
                       builder: (context, state) {
                         return IconButton(
                           icon: const Icon(Icons.logout),
-                          onPressed: () async{
-                      await      context.read<AuthCubit>().logoutUser();
-                           },
+                          onPressed: () async {
+                            await context.read<AuthCubit>().logoutUser();
+                          },
                         );
                       },
                     ),

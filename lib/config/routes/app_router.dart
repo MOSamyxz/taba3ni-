@@ -9,6 +9,7 @@ import 'package:taba3ni/features/auth/presentation/pages/teacher_login_page.dart
 import 'package:taba3ni/features/auth/presentation/pages/user_type_selector_page.dart';
 import 'package:taba3ni/features/group_details/presentation/page/group_details.dart';
 import 'package:taba3ni/features/add_group/presentation/page/add_group_page.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/groups/presentation/cubit/group_cubit.dart';
 import 'package:taba3ni/features/groups/presentation/page/group_page.dart';
 import 'package:taba3ni/features/lesson_attendance/presentation/page/lesson_attendance_page.dart';
@@ -51,7 +52,10 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.addGroup,
-      pageBuilder: (context, state) => _buildFadeTransition(AddGroupPage()),
+      pageBuilder:
+          (context, state) => _buildFadeTransition(
+            AddGroupPage(group: state.extra as GroupEntity),
+          ),
     ),
     GoRoute(
       path: AppRoutes.groupDetails,
