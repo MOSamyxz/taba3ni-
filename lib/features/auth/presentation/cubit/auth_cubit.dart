@@ -6,12 +6,11 @@ import '../../../../core/errors/exceptions.dart';
 import '../../domain/usecases/login_teacher_usecase.dart';
 import '../../domain/usecases/login_parent_usecase.dart';
 
-
 class AuthCubit extends Cubit<AuthState> {
   final LoginTeacherUseCase loginTeacher;
   final LoginParentUseCase loginParent;
   final LogoutUseCase logout;
-  final LocalStorageService localStorage ;
+  final LocalStorageService localStorage;
 
   AuthCubit({
     required this.loginTeacher,
@@ -25,10 +24,10 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final user = await loginTeacher(email, password);
       await localStorage.saveUser(
-  id: user.id,
-  type: 'teacher', 
-  name: user.name,
-);
+        id: user.id,
+        type: 'teacher',
+        name: user.name,
+      );
 
       emit(AuthSuccess(user));
     } on LoginException {
@@ -46,11 +45,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       final user = await loginParent(username, phone);
-      await localStorage.saveUser(
-        id: user.id,
-        type: 'parent',
-        name: user.name,
-      );
+      await localStorage.saveUser(id: user.id, type: 'parent', name: user.name);
       emit(AuthSuccess(user));
     } on LoginException {
       emit(const AuthFailure("البيانات التي أدخلتها غير صحيحة."));
@@ -64,7 +59,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logoutUser() async {
+    await localStorage.clearUser();
     await logout();
-    emit(AuthInitial());
+    emit(AuthLogOut());
   }
 }

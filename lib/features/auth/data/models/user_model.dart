@@ -8,7 +8,7 @@ class UserModel extends UserEntity {
     required super.role,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json, UserRole role) {
+  factory UserModel.fromMap(Map<String, dynamic> json, UserRole role) {
     return UserModel(
       id: json['id'],
       name: json['name'],

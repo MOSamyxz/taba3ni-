@@ -19,3 +19,5 @@ class AuthFailure extends AuthState {
 
   const AuthFailure(this.error);
 }
+
+class AuthLogOut extends AuthState {}

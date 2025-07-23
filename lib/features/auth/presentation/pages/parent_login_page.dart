@@ -6,8 +6,8 @@ import 'package:taba3ni/core/constants/app_colors.dart';
 import 'package:taba3ni/core/constants/app_size.dart';
 import 'package:taba3ni/core/constants/app_text_styles.dart';
 import 'package:taba3ni/features/auth/presentation/cubit/auth_state.dart';
-import 'package:taba3ni/features/auth/presentation/widgets/custom_button.dart';
-import 'package:taba3ni/features/auth/presentation/widgets/gradiant_text_field.dart';
+import 'package:taba3ni/features/shaerd_widgets/custom_button.dart';
+import 'package:taba3ni/features/shaerd_widgets/gradiant_text_field.dart';
 
 import '../cubit/auth_cubit.dart';
 
@@ -49,6 +49,8 @@ class _ParentLoginPageState extends State<ParentLoginPage> {
             }
           },
           builder: (context, state) {
+            final textStyles = AppTextStyles(context);
+
             return Center(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.all(24),
@@ -60,15 +62,14 @@ class _ParentLoginPageState extends State<ParentLoginPage> {
                       AppSize.verticalSpace(16),
                       Text(
                         'مرحباً بك 👋',
-                        style: AppTextStyles.body.copyWith(
-                          color: AppColors.pLightYellow,
-                          fontSize: 20,
+                        style: textStyles.body.copyWith(
+                           fontSize: 20,
                         ),
                       ),
                       AppSize.verticalSpace(8),
                       Text(
                         'أدخل بيانات ابنك لمتابعته داخل المجموعة.',
-                        style: AppTextStyles.body.copyWith(
+                        style: textStyles.body.copyWith(
                           color: AppColors.textSecondary,
                           fontSize: 18,
                         ),
@@ -109,7 +110,7 @@ class _ParentLoginPageState extends State<ParentLoginPage> {
                                 );
                               }
                             },
-                            child: 'تسجيل دخول',
+                            text: 'تسجيل دخول',
                           ),
                     ],
                   ),

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:taba3ni/config/injection/injection.dart';
+import 'package:taba3ni/config/routes/app_routes.dart';
 import 'package:taba3ni/core/constants/app_assets.dart';
 import 'package:taba3ni/core/constants/app_colors.dart';
 import 'package:taba3ni/core/constants/app_size.dart';
 import 'package:taba3ni/core/constants/app_text_styles.dart';
 import 'package:taba3ni/features/auth/presentation/cubit/auth_state.dart';
-import 'package:taba3ni/features/auth/presentation/widgets/custom_button.dart';
-import 'package:taba3ni/features/auth/presentation/widgets/gradiant_text_field.dart';
+import 'package:taba3ni/features/shaerd_widgets/custom_button.dart';
+import 'package:taba3ni/features/shaerd_widgets/gradiant_text_field.dart';
 import '../cubit/auth_cubit.dart';
 
 class TeacherLoginPage extends StatefulWidget {
@@ -46,9 +48,12 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                   backgroundColor: Colors.green,
                 ),
               );
+              context.pushReplacement(  AppRoutes.groupPage);
             }
           },
           builder: (context, state) {
+            final textStyles = AppTextStyles(context);
+
             return Padding(
               padding: AppSize.defaultPadding,
               child: Center(
@@ -63,15 +68,14 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                         AppSize.verticalSpace(16),
                         Text(
                           'مرحباً أستاذ محمد 👋',
-                          style: AppTextStyles.body.copyWith(
-                            color: AppColors.pLightYellow,
-                            fontSize: 20,
+                          style: textStyles.body.copyWith(
+                             fontSize: 20,
                           ),
                         ),
                         AppSize.verticalSpace(8),
                         Text(
                           'يرجى تسجيل الدخول للمتابعة إلى لوحة التحكم.',
-                          style: AppTextStyles.body.copyWith(
+                          style: textStyles.body.copyWith(
                             color: AppColors.textSecondary,
                             fontSize: 18,
                           ),
@@ -112,7 +116,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                                   );
                                 }
                               },
-                              child: 'تسجيل دخول كمدرس',
+                              text: 'تسجيل دخول كمدرس',
                             ),
                       ],
                     ),
