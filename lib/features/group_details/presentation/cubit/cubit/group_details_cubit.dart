@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taba3ni/features/group_details/domain/entity/group_details_entity.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/group_details/domain/usecase/group_details_usecase.dart';
 
 part 'group_details_state.dart';

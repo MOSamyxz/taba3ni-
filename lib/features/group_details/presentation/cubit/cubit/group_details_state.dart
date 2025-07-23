@@ -11,7 +11,7 @@ class GroupDetailsInitial extends GroupDetailsState {}
 class GroupDetailsLoading extends GroupDetailsState {}
 
 class GroupDetailsLoaded extends GroupDetailsState {
-  final GroupDetailsEntity group;
+  final GroupEntity group;
   const GroupDetailsLoaded(this.group);
 
   @override
@@ -19,9 +19,9 @@ class GroupDetailsLoaded extends GroupDetailsState {
 }
 
 class GroupDetailsError extends GroupDetailsState {
-  final String message;
-  const GroupDetailsError(this.message);
+  final String error;
+  const GroupDetailsError(this.error);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [error];
 }
