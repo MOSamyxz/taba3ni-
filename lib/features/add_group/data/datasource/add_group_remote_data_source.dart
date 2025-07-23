@@ -1,5 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:taba3ni/features/groups/data/model/group_model.dart';
+import 'package:taba3ni/features/group_shared/data/model/group_model.dart';
 
 
 abstract class AddGroupRemoteDataSource {

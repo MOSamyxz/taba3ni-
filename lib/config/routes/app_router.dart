@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:taba3ni/config/injection/injection.dart';
+import 'package:taba3ni/features/add_student/presentation/page/add_student_page.dart';
 import 'package:taba3ni/features/auth/presentation/pages/auth_gate.dart';
 import 'package:taba3ni/features/auth/presentation/pages/parent_login_page.dart';
 import 'package:taba3ni/features/auth/presentation/pages/teacher_login_page.dart';
 import 'package:taba3ni/features/auth/presentation/pages/user_type_selector_page.dart';
 import 'package:taba3ni/features/group_details/presentation/page/group_details.dart';
 import 'package:taba3ni/features/add_group/presentation/page/add_group_page.dart';
+import 'package:taba3ni/features/groups/presentation/cubit/group_cubit.dart';
 import 'package:taba3ni/features/groups/presentation/page/group_page.dart';
+import 'package:taba3ni/features/lesson_attendance/presentation/page/lesson_attendance_page.dart';
+import 'package:taba3ni/features/start_lesson/presentation/page/start_lesson_page.dart';
+import 'package:taba3ni/features/student_shared/domain/entity/student_entity.dart';
 import 'app_routes.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -18,21 +25,29 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.userTypeSelector,
-      pageBuilder: (context, state) => _buildFadeTransition(const UserTypeSelectorPage()),
+      pageBuilder:
+          (context, state) =>
+              _buildFadeTransition(const UserTypeSelectorPage()),
     ),
     GoRoute(
       path: AppRoutes.teacherLogin,
-      pageBuilder: (context, state) => _buildFadeTransition(const TeacherLoginPage()),
+      pageBuilder:
+          (context, state) => _buildFadeTransition(const TeacherLoginPage()),
     ),
     GoRoute(
       path: AppRoutes.parentLogin,
-      pageBuilder: (context, state) => _buildFadeTransition(const ParentLoginPage()),
+      pageBuilder:
+          (context, state) => _buildFadeTransition(const ParentLoginPage()),
     ),
     GoRoute(
       path: AppRoutes.groupPage,
-      pageBuilder: (context, state) => _buildFadeTransition(
-        const GroupPage(),
-      ),
+      pageBuilder:
+          (context, state) => _buildFadeTransition(
+            BlocProvider(
+              create: (context) => sl<GroupCubit>()..loadGroups(),
+              child: const GroupPage(),
+            ),
+          ),
     ),
     GoRoute(
       path: AppRoutes.addGroup,
@@ -40,19 +55,55 @@ final GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.groupDetails,
-      pageBuilder: (context, state) => _buildFadeTransition(
-        GroupDetailsPage(groupId: state.extra as String),
-      ))
+      pageBuilder:
+          (context, state) => _buildFadeTransition(
+            GroupDetailsPage(groupId: state.extra as String),
+          ),
+    ),
+    GoRoute(
+      path: AppRoutes.lessonAttendance,
+
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+
+        final groupId = extra['groupId'] as String;
+        final lessonId = extra['lessonId'] as String;
+        return _buildFadeTransition(
+          LessonAttendancePage(groupId: groupId, lessonId: lessonId),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.startLesson,
+
+      pageBuilder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>;
+        final groupId = extra['groupId'] as String;
+        final students = extra['students'] as List<StudentsEntity>;
+        return _buildFadeTransition(
+          StartLessonPage(groupId: groupId, students: students),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.addStudent,
+
+      pageBuilder:
+          (context, state) => _buildFadeTransition(
+            AddStudentPage(groupId: state.extra as String),
+          ),
+    ),
   ],
-  errorBuilder: (context, state) => const Scaffold(
-    body: Center(child: Text('404 – Page not found')),
-  ),
+  errorBuilder:
+      (context, state) =>
+          const Scaffold(body: Center(child: Text('404 – Page not found'))),
 );
 
 CustomTransitionPage _buildFadeTransition(Widget child) {
   return CustomTransitionPage(
     child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-        FadeTransition(opacity: animation, child: child),
+    transitionsBuilder:
+        (context, animation, secondaryAnimation, child) =>
+            FadeTransition(opacity: animation, child: child),
   );
 }

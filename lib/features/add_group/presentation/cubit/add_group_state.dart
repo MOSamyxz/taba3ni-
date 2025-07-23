@@ -21,9 +21,9 @@ class AddGroupSubmitted extends AddGroupState {
 }
 
 class AddGroupError extends AddGroupState {
-  final String message;
-  AddGroupError(this.message);
+  final String error;
+  AddGroupError(this.error);
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [error];
 }

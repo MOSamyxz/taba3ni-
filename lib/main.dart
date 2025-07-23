@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taba3ni/core/service/app_service.dart';
 import 'package:taba3ni/config/injection/injection.dart';
 import 'package:taba3ni/teba3ni.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,8 +17,11 @@ void main() async{
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
 
-  await init(); // service_locator
-  await sl<AppService>().initApp(); // هنا الـ Boot
-  runApp(const Taba3ni());
+  await init();  
+  await sl<AppService>().initApp();  
+  runApp(DevicePreview(
+        enabled: !kReleaseMode,
+
+     builder: (context) =>  const Taba3ni()));
 }
 

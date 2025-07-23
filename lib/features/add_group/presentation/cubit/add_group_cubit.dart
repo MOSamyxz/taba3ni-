@@ -6,8 +6,8 @@ import 'package:equatable/equatable.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:taba3ni/features/groups/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/add_group/domain/usecase/add_group_usecase.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:uuid/uuid.dart';
 
 part 'add_group_state.dart';
@@ -27,6 +27,13 @@ class AddGroupCubit extends Cubit<AddGroupState> {
     'الخميس': null,
     'الجمعة': null,
   };
+String? selectedGradeArabic;
+String? selectedGradeEnglish; // القيمة اللي هتتبعت لـ Supabase
+  final Map<String, String> gradeOptionsMap = {
+  'ابتدائي': 'primary',
+  'إعدادي': 'middle',
+  'ثانوي': 'high',
+};
 
   AddGroupCubit({required this.addGroupUseCase}) : super(AddGroupInitial());
 
@@ -34,6 +41,7 @@ class AddGroupCubit extends Cubit<AddGroupState> {
     final time = await showTimePicker(
       context: context,
       initialTime: const TimeOfDay(hour: 16, minute: 0),
+      barrierColor:  Colors.black54,
     );
     if (time != null) {
       selectedDays[day] = time;
@@ -43,11 +51,15 @@ class AddGroupCubit extends Cubit<AddGroupState> {
 
   Future<GroupEntity?> submit(BuildContext context) async {
     final name = nameController.text.trim();
+    final notes = notesController.text.trim();
     if (name.isEmpty) {
       emit(AddGroupError('اسم المجموعة مطلوب'));
       return null;
     }
-
+if (notes.isEmpty) {
+      emit(AddGroupError('الملاحظات مطلوبة'));
+      return null;
+    }
     final schedule = selectedDays.entries
         .where((entry) => entry.value != null)
         .map((entry) => ScheduleEntry(
@@ -66,6 +78,7 @@ class AddGroupCubit extends Cubit<AddGroupState> {
       name: name,
       notes: notesController.text.trim(),
       schedule: schedule,
+      grade: selectedGradeEnglish??'',
     );
 
     emit(AddGroupSubmitted(group));

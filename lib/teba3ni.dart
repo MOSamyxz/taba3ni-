@@ -1,4 +1,5 @@
 
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:taba3ni/config/routes/app_router.dart';
@@ -11,9 +12,12 @@ class Taba3ni extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      useInheritedMediaQuery : true,
+    //   locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       title: 'Taba3ni',
       debugShowCheckedModeBanner: false,
-      locale: const Locale('ar', 'EG'), // Set Arabic locale
+   locale: const Locale('ar', 'EG'), // Set Arabic locale
         supportedLocales: const [
     Locale('en', 'US'),
     Locale('ar', 'EG'),
@@ -24,6 +28,8 @@ class Taba3ni extends StatelessWidget {
     GlobalCupertinoLocalizations.delegate,
   ],
       theme: AppTheme.darkTheme, // Use dark theme for the app
+         //    theme: AppTheme.lightTheme, // Use dark theme for the app
+
     routerConfig: appRouter,
     );
   }

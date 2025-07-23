@@ -10,5 +10,8 @@ class AppRoutes {
   static const String groupPage = '/groupPage';
   static const String addGroup = '/addGroup';
   static const String groupDetails = '/groupDetails';
+  static const String lessonAttendance = '/lessonAttendance';
+  static const String startLesson = '/startLesson';
+  static const String addStudent = '/addStudent';
   // Add more as you build
 }

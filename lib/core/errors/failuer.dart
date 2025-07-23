@@ -1,18 +1,18 @@
   // lib/core/errors/failure.dart
 
 abstract class Failure {
-  final String message;
-  const Failure(this.message);
+  final String error;
+  const Failure(this.error);
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  const ServerFailure(super.error);
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure(super.message);
+  const CacheFailure(super.error);
 }
 
 class LoginFailure extends Failure {
-  const LoginFailure(super.message);
+  const LoginFailure(super.error);
 }
