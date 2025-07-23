@@ -1,13 +1,12 @@
-// lib/core/theme/app_theme.dart
-
 import 'package:flutter/material.dart';
 import 'package:taba3ni/core/constants/app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
+    primaryColor: AppColors.primary,
     scaffoldBackgroundColor: AppColors.lightBackground,
-    primaryColor: AppColors.pYellow,
+     fontFamily: 'Roboto', // أو أي خط تريده
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.pYellow,
       foregroundColor: AppColors.lightTextPrimary,
@@ -19,22 +18,30 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    colorScheme: ColorScheme.light(
-      primary: AppColors.pYellow,
-      secondary: AppColors.pBlue,
-      
-      error: AppColors.error,
-    ),
-    textTheme: TextTheme(
-      bodyLarge: TextStyle(color: AppColors.lightTextPrimary),
-      bodyMedium: TextStyle(color: AppColors.textSecondary),
+     
+ 
+ 
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.lightTextPrimary),
+      headlineMedium: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: AppColors.lightTextPrimary),
+      headlineSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.lightTextPrimary),
+
+      bodyLarge: TextStyle(fontSize: 16, color: AppColors.lightTextPrimary),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+
+      labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary),
+      labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+
+      titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: AppColors.textSecondary),
     ),
   );
 
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
+        primaryColor: AppColors.primary,
+
     scaffoldBackgroundColor: AppColors.darkBackground,
-    primaryColor: AppColors.pYellow,
+     fontFamily: 'Roboto',
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.darkBackground,
       foregroundColor: AppColors.darkTextPrimary,
@@ -46,14 +53,19 @@ class AppTheme {
         fontWeight: FontWeight.bold,
       ),
     ),
-    colorScheme: ColorScheme.dark(
-      primary: AppColors.pYellow,
-      secondary: AppColors.pBlue,
-      error: AppColors.error,
-    ),
-    textTheme: TextTheme(
-      bodyLarge: TextStyle(color: AppColors.darkTextPrimary),
-      bodyMedium: TextStyle(color: AppColors.textSecondary),
+    
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: AppColors.darkTextPrimary),
+      headlineMedium: TextStyle(fontSize: 24, fontWeight: FontWeight.w600, color: AppColors.darkTextPrimary),
+      headlineSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: AppColors.darkTextPrimary),
+
+      bodyLarge: TextStyle(fontSize: 16, color: AppColors.darkTextPrimary),
+      bodyMedium: TextStyle(fontSize: 14, color: AppColors.textSecondary),
+
+      labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary),
+      labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+
+      titleMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: AppColors.textSecondary),
     ),
   );
 }

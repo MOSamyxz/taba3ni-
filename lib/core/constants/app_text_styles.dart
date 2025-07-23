@@ -1,71 +1,78 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
 
 class AppTextStyles {
+  final BuildContext context;
+  final TextTheme textTheme;
+  final ColorScheme colorScheme;
+
+  AppTextStyles(this.context)
+      : textTheme = Theme.of(context).textTheme,
+        colorScheme = Theme.of(context).colorScheme;
+
   // Headings
-  static const TextStyle heading1 = TextStyle(
-    fontSize: 28,
-    fontWeight: FontWeight.bold,
-    color: AppColors.lightTextPrimary,
-  );
+  TextStyle get heading1 => textTheme.headlineLarge!.copyWith(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: textTheme.headlineLarge?.color,
+      );
 
-  static const TextStyle heading2 = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.w600,
-    color: AppColors.lightTextPrimary,
-  );
+  TextStyle get heading2 => textTheme.headlineMedium!.copyWith(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        color: textTheme.headlineMedium?.color,
+      );
 
-  static const TextStyle heading3 = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w500,
-    color: AppColors.lightTextPrimary,
-  );
+  TextStyle get heading3 => textTheme.headlineSmall!.copyWith(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: textTheme.headlineSmall?.color,
+      );
 
   // Body text
-  static const TextStyle body = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.normal,
-    color: AppColors.lightTextPrimary,
-  );
+  TextStyle get body => textTheme.bodyLarge!.copyWith(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        color: textTheme.bodyLarge?.color,
+      );
 
-  static const TextStyle bodySecondary = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.normal,
-    color: AppColors.textSecondary,
-  );
+  TextStyle get bodySecondary => textTheme.bodyMedium!.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
+        color: textTheme.bodyMedium?.color,
+      );
 
   // Labels
-  static const TextStyle label = TextStyle(
-    fontSize: 12,
-    fontWeight: FontWeight.w500,
-    color: AppColors.textSecondary,
-  );
+  TextStyle get label => textTheme.labelMedium!.copyWith(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: textTheme.labelMedium?.color,
+      );
 
   // Error
-  static const TextStyle error = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    color: AppColors.error,
-  );
+  TextStyle get error => textTheme.bodyMedium!.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: colorScheme.error,
+      );
 
-  // Success
-  static const TextStyle success = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
-    color: AppColors.success,
-  );
+  // Success (custom color, أو تقدر تعرف success في colorScheme)
+  TextStyle get success => textTheme.bodyMedium!.copyWith(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: Colors.green, // تقدر تخليه dynamic لو عرفته في الثيم
+      );
 
   // Button
-  static const TextStyle button = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.bold,
-    color: Colors.white,
-  );
+  TextStyle get button => textTheme.labelLarge!.copyWith(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: colorScheme.onPrimary,
+      );
 
   // Subtitle
-  static const TextStyle subtitle = TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w400,
-    color: AppColors.textSecondary,
-  );
+  TextStyle get subtitle => textTheme.titleMedium!.copyWith(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        color: textTheme.titleMedium?.color,
+      );
 }
