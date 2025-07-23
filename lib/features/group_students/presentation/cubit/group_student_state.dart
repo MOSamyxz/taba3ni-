@@ -18,7 +18,15 @@ final class GroupStudentsLoaded extends GroupStudentsState {
 }
 
 final class GroupStudentsError extends GroupStudentsState {
-  final String message;
+  final String error;
 
-  const GroupStudentsError(this.message);
+  const GroupStudentsError(this.error);
+}
+
+final class StudentDeleted extends GroupStudentsState {}
+
+final class StudentDeletedError extends GroupStudentsState {
+  final String error;
+
+  const StudentDeletedError(this.error);
 }
