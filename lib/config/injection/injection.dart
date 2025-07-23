@@ -8,6 +8,7 @@ import 'package:get_it/get_it.dart';
 import 'package:taba3ni/features/add_group/data/datasource/add_group_remote_data_source.dart';
 import 'package:taba3ni/features/add_group/data/repository/add_group_repository_impl.dart';
 import 'package:taba3ni/features/add_group/domain/repository/add_group_repository.dart';
+import 'package:taba3ni/features/add_group/domain/usecase/update_group_usecase.dart';
 import 'package:taba3ni/features/add_student/data/datasource/add_student_remote_data_source.dart';
 import 'package:taba3ni/features/add_student/data/repository/add_student_repository_impl.dart';
 import 'package:taba3ni/features/add_student/domain/repository/add_student_repository.dart';
@@ -125,13 +126,14 @@ Future<void> init() async {
     () => AddGroupRemoteDataSourceImpl(sl()),
   );
   //? Repository
-  sl.registerLazySingleton<AddGroupRepository>(
-    () => AddGroupRepositoryImpl(sl()),
+  sl.registerLazySingleton<AddUpdateGroupRepository>(
+    () => AddUpdateGroupRepositoryImpl(sl()),
   );
   //? Use Cases
   sl.registerFactory(() => AddGroupUseCase(sl()));
+  sl.registerFactory(() => UpdateGroupUseCase(sl()));
   //? Cubit
-  sl.registerFactory(() => AddGroupCubit(addGroupUseCase: sl()));
+  sl.registerFactory(() => AddGroupCubit(addGroupUseCase: sl(),updateGroupUseCase: sl()));
 
     //* Features - Groups Details
   //? Remote Data Source

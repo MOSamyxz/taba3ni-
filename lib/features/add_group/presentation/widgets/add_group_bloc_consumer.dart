@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -19,9 +18,14 @@ class AddGroupBlocConsumer extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.error), backgroundColor: Colors.red),
           );
-        } else if (state is AddGroupSubmitted) {
-          await context.read<AddGroupCubit>().addGroup(state.group);
-          if (context.mounted) context.pop(true);
+        } else if (state is GroupSubmitted) {
+          if (context.read<AddGroupCubit>().isEditMode) {
+            await context.read<AddGroupCubit>().updateGroup(state.group);
+            if (context.mounted) context.pop(true);
+          } else {
+            await context.read<AddGroupCubit>().addGroup(state.group);
+            if (context.mounted) context.pop(true);
+          }
         }
       },
       builder: (context, state) {

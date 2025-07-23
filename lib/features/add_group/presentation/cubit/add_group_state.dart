@@ -12,9 +12,9 @@ class AddGroupUpdated extends AddGroupState {}
 
 class AddGroupLoading extends AddGroupState {}
 
-class AddGroupSubmitted extends AddGroupState {
+class GroupSubmitted extends AddGroupState {
   final GroupEntity group;
-  AddGroupSubmitted(this.group);
+  GroupSubmitted(this.group);
 
   @override
   List<Object?> get props => [group];
@@ -23,6 +23,16 @@ class AddGroupSubmitted extends AddGroupState {
 class AddGroupError extends AddGroupState {
   final String error;
   AddGroupError(this.error);
+
+  @override
+  List<Object?> get props => [error];
+}
+
+class UpdateGroupLoading extends AddGroupState {}
+
+class UpdateGroupError extends AddGroupState {
+  final String error;
+  UpdateGroupError(this.error);
 
   @override
   List<Object?> get props => [error];

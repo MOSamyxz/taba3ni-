@@ -18,7 +18,7 @@ class AddGroupPageView extends StatelessWidget {
     super.key,
     required this.r,
     required this.textStyle,
-    required this.cubit,
+    required this.cubit, 
   });
 
   final Responsive r;
@@ -124,7 +124,7 @@ class AddGroupPageView extends StatelessWidget {
           CustomButton(
                             onPressed: () => cubit.submit(context),
     
-            text:  'حفظ المجموعة' ,
+  text: cubit.isEditMode ? 'تحديث المجموعة' : 'حفظ المجموعة',
           ) 
         ],
       ),

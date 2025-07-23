@@ -6,10 +6,10 @@ import 'package:taba3ni/features/group_shared/data/model/group_model.dart';
 import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 
 
-class AddGroupRepositoryImpl implements AddGroupRepository {
+class AddUpdateGroupRepositoryImpl implements AddUpdateGroupRepository {
   final AddGroupRemoteDataSource remoteDataSource;
 
-  AddGroupRepositoryImpl(this.remoteDataSource);
+  AddUpdateGroupRepositoryImpl(this.remoteDataSource);
 
   @override
   Future<void> addGroup(GroupEntity group) async {
@@ -24,4 +24,19 @@ class AddGroupRepositoryImpl implements AddGroupRepository {
     );
     log('✅ Supabase: group added successfully: ${group.name}');
   }
+  
+  @override
+  Future<void> updateGroup(GroupEntity group) async{
+     await remoteDataSource.updateGroup(
+       GroupModel(
+         id: group.id,
+         name: group.name,
+         schedule: group.schedule,
+         notes: group.notes,
+         grade: group.grade,
+       ),
+     );
+   }
+
+   
 }
