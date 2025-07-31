@@ -1,11 +1,11 @@
-import 'dart:developer';
-
+ 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taba3ni/config/responsive/responsive.dart';
 import 'package:taba3ni/config/routes/app_routes.dart';
 import 'package:taba3ni/core/constants/app_text_styles.dart';
+import 'package:taba3ni/core/utils/arabic_to%20_english_number.dart';
 import 'package:taba3ni/core/utils/group_utils.dart';
 import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/groups/presentation/cubit/group_cubit.dart';
@@ -97,7 +97,7 @@ class GroupsCardItem extends StatelessWidget {
                         ),
 
                         TextSpan(
-                          text: " ${entry.day} - ${entry.time}",
+                          text: " ${Utils.getArabicDay(entry.day)} - ${Utils.parseTimeString(entry.time).format(context)}",
                           style: textStyle.heading3.copyWith(
                             fontSize: r.sp(5),
 
@@ -128,22 +128,37 @@ class GroupsCardItem extends StatelessWidget {
                 ),
               ],
             ),
-            IconButton(
-              onPressed: () async {
-                final result = await context.push(
-                  AppRoutes.addGroup,
-                  extra: group,
-                );
-
-                if (result == true && context.mounted) {
-                  context.read<GroupCubit>().loadGroups();
-                }
-              },
-              icon: Icon(
-                Icons.edit_note_outlined,
-                color: Colors.black,
-                size: r.radius(6),
-              ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    final result = await context.push(
+                      AppRoutes.addGroup,
+                      extra: group,
+                    );
+                
+                    if (result == true && context.mounted) {
+                      context.read<GroupCubit>().loadGroups();
+                    }
+                  },
+                  icon: Icon(
+                    Icons.edit_note_outlined,
+                    color: Colors.black,
+                    size: r.radius(6),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async {
+                     context.read<GroupCubit>().deleteGroup(group.id);
+                  },
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                    size: r.radius(6),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

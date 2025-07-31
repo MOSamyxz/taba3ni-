@@ -48,7 +48,7 @@ class _TeacherLoginPageState extends State<TeacherLoginPage> {
                   backgroundColor: Colors.green,
                 ),
               );
-              context.pushReplacement(  AppRoutes.groupPage);
+              context.pushReplacement(  AppRoutes.layoutScreen);
             }
           },
           builder: (context, state) {

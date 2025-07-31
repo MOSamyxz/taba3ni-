@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:taba3ni/config/responsive/responsive.dart';
 import 'package:taba3ni/config/routes/app_routes.dart';
-import 'package:taba3ni/core/constants/app_colors.dart';
-import 'package:taba3ni/core/constants/app_text_styles.dart';
+ import 'package:taba3ni/core/constants/app_text_styles.dart';
 import 'package:taba3ni/features/groups/presentation/cubit/group_cubit.dart';
 
 class GroupsWelcomeCard extends StatelessWidget {

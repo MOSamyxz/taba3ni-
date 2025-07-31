@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:taba3ni/config/injection/injection.dart';
 import 'package:taba3ni/features/add_student/presentation/page/add_student_page.dart';
 import 'package:taba3ni/features/auth/presentation/pages/auth_gate.dart';
 import 'package:taba3ni/features/auth/presentation/pages/parent_login_page.dart';
@@ -10,8 +8,8 @@ import 'package:taba3ni/features/auth/presentation/pages/user_type_selector_page
 import 'package:taba3ni/features/group_details/presentation/page/group_details.dart';
 import 'package:taba3ni/features/add_group/presentation/page/add_group_page.dart';
 import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
-import 'package:taba3ni/features/groups/presentation/cubit/group_cubit.dart';
 import 'package:taba3ni/features/groups/presentation/page/group_page.dart';
+import 'package:taba3ni/features/layout/page/layout_page.dart';
 import 'package:taba3ni/features/lesson_attendance/presentation/page/lesson_attendance_page.dart';
 import 'package:taba3ni/features/start_lesson/presentation/page/start_lesson_page.dart';
 import 'package:taba3ni/features/student_shared/domain/entity/student_entity.dart';
@@ -41,20 +39,21 @@ final GoRouter appRouter = GoRouter(
           (context, state) => _buildFadeTransition(const ParentLoginPage()),
     ),
     GoRoute(
+      path: AppRoutes.layoutScreen,
+      builder: (context, state) => const LayoutScreen(),
+    ),
+    GoRoute(
       path: AppRoutes.groupPage,
       pageBuilder:
           (context, state) => _buildFadeTransition(
-            BlocProvider(
-              create: (context) => sl<GroupCubit>()..loadGroups(),
-              child: const GroupPage(),
-            ),
+            const GroupPage(),
           ),
     ),
     GoRoute(
       path: AppRoutes.addGroup,
       pageBuilder:
           (context, state) => _buildFadeTransition(
-            AddGroupPage(group: state.extra as GroupEntity),
+            AddGroupPage(group: state.extra as GroupEntity?),
           ),
     ),
     GoRoute(

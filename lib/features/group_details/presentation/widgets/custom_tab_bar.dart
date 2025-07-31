@@ -41,6 +41,7 @@ class _StackOverState extends State<StackOver>
               ),
               child: TabBar(
                 controller: _tabController,
+                labelPadding: const EdgeInsets.all(0),
                  dividerHeight: 0,
                  indicatorSize: TabBarIndicatorSize.tab,
                  indicator: BoxDecoration(

@@ -55,6 +55,14 @@ import 'package:taba3ni/features/lesson_attendance/data/repository/lesson_attend
 import 'package:taba3ni/features/lesson_attendance/domain/repository/lesson_attendance_repository.dart';
 import 'package:taba3ni/features/lesson_attendance/domain/usecase/get_lesson_attendance_usecase.dart';
 import 'package:taba3ni/features/lesson_attendance/presentation/cubit/lessons_attendance_cubit.dart';
+import 'package:taba3ni/features/payment/data/datasource/payment_remote_data_source.dart';
+import 'package:taba3ni/features/payment/data/repository/payment_repository_impl.dart';
+import 'package:taba3ni/features/payment/domain/repository/payment_repository.dart';
+import 'package:taba3ni/features/payment/domain/usecase/add_payment_usecase.dart';
+import 'package:taba3ni/features/payment/domain/usecase/get_payments_by_group_usecase.dart';
+import 'package:taba3ni/features/payment/domain/usecase/get_payments_usecase.dart';
+import 'package:taba3ni/features/payment/domain/usecase/update_payment_usecase.dart';
+import 'package:taba3ni/features/payment/presentation/cubit/payment_cubit.dart';
 import 'package:taba3ni/features/start_lesson/data/datasource/start_lesson_remote_data_source.dart';
 import 'package:taba3ni/features/start_lesson/data/repository/start_lesson_repository_impl.dart';
 import 'package:taba3ni/features/start_lesson/domain/repository/start_lesson_repository.dart';
@@ -230,7 +238,7 @@ Future<void> init() async {
   sl.registerFactory(() => AddStudentUseCase(sl()));
    //?  Cubit
   sl.registerFactory(
-    () => AddStudentCubit(usecase: sl()),
+    () => AddStudentCubit(usecase: sl(),addPaymentUseCase: sl()),
   );
 
   
@@ -250,6 +258,26 @@ Future<void> init() async {
    //?  Cubit
   sl.registerFactory(
     () => StartLessonCubit(createLesson: sl(),recordAttendance: sl()),
+  );
+
+   //* Features - Payment 
+
+   //? Remote Data Source
+  sl.registerLazySingleton<PaymentRemoteDataSource>(
+    () => PaymentRemoteDataSourceImpl(sl()),
+  );
+  //? Repository
+  sl.registerLazySingleton<PaymentRepository>(
+    () => PaymentRepositoryImpl(sl()),
+  );
+  //? Use Cases
+  sl.registerFactory(() => GetPaymentsByGroupUseCase(sl()));
+  sl.registerFactory(() => GetPaymentsUseCase(sl()));
+  sl.registerFactory(() => UpdatePaymentUsecase(sl()));
+  sl.registerFactory(() => AddPaymentUseCase(sl()));
+   //?  Cubit
+  sl.registerFactory(
+    () => PaymentCubit( getPaymentsByGroupUseCase: sl(),getPaymentsByStudentUseCase: sl(),updatePaymentUsecase: sl(),studentRepo : sl()),
   );
 
 }

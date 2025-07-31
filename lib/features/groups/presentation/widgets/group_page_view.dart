@@ -35,47 +35,46 @@ class GroupPageView extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomTopBar(
-                  r: r,
-                  textStyle: textStyle,
-                  title: ' لوحة التحكم',
-                  icon: Icons.dashboard_customize,
-                  trailing: BlocProvider(
-                    create: (context) => sl<AuthCubit>(),
-                    child: BlocConsumer<AuthCubit, AuthState>(
-                      listener: (context, state) {
-                        if (state is AuthLogOut) {
-                          context.go(AppRoutes.authGate);
-                        }
-                      },
-                      builder: (context, state) {
-                        return IconButton(
-                          icon: const Icon(Icons.logout),
-                          onPressed: () async {
-                            await context.read<AuthCubit>().logoutUser();
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                AppSize.verticalSpace(r.hp(2)),
-                GroupsWelcomeCard(r: r, textStyle: textStyle),
-                Divider(thickness: 1, color: Colors.grey.shade300),
-              ],
-            ),
+            child: GroupTop(r: r, textStyle: textStyle),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              final group = groups[index];
+               final group = groups[index];
+
               return GroupsCardItem(group: group, r: r, textStyle: textStyle);
             }, childCount: groups.length),
           ),
         ],
       ),
+    );
+  }
+}
+
+class GroupTop extends StatelessWidget {
+  const GroupTop({
+    super.key,
+    required this.r,
+    required this.textStyle,
+  });
+
+  final Responsive r;
+  final AppTextStyles textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CustomTopBar(
+          r: r,
+          textStyle: textStyle,
+          title: ' المجموعات',
+          icon: Icons.group,
+        
+        ),
+        AppSize.verticalSpace(r.hp(2)),
+         Divider(thickness: 1, color: Colors.grey.shade300),
+      ],
     );
   }
 }

@@ -27,7 +27,7 @@ class _AuthGateState extends State<AuthGate> {
       context.go(AppRoutes.userTypeSelector);
     } else {
       if (localStorage.getUserType() == 'teacher') {
-        context.go(AppRoutes.groupPage);
+        context.go(AppRoutes.layoutScreen);
       } else {
         context.go(AppRoutes.homeParent);
       }

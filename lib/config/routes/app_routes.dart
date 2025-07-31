@@ -5,6 +5,7 @@ class AppRoutes {
   static const String userTypeSelector = '/userTypeSelector';
   static const String teacherLogin = '/teacherlogin';
   static const String parentLogin = '/parentlogin';
+  static const String layoutScreen = '/layoutScreen';
   static const String homeTeacher = '/homeTeacher';
   static const String homeParent = '/homeParent';
   static const String groupPage = '/groupPage';

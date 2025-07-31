@@ -13,6 +13,7 @@ import 'package:taba3ni/features/group_lesson/presentation/page/lesson_list_widg
 import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/group_students/presentation/cubit/group_student_cubit.dart';
 import 'package:taba3ni/features/group_students/presentation/page/student_list_widget.dart';
+import 'package:taba3ni/features/payment/presentation/page/payment_page.dart';
 import 'package:taba3ni/features/shaerd_widgets/custom_top_bar.dart';
 
 class GroupDetailsView extends StatelessWidget {
@@ -61,11 +62,16 @@ class GroupDetailsView extends StatelessWidget {
                   icon: Icons.analytics,
                   text: 'سجل الحضور',
                  ),),
+                  Tab(child: _tabWidget(
+                  icon: Icons.payment_outlined,
+                  text: 'سجل الدفع',
+                 ),),
               ],
               children: [
                 GroupStudentListWidget(groupId: group.id,r:r),
                 GroupLessonListWidget(groupId: group.id ,r:r), 
                 AttendanceReportWidget(groupId: group.id),
+PaymentReportWidget(groupId: group.id,r:r),
               ],
             ),
           ),
@@ -81,12 +87,12 @@ class GroupDetailsView extends StatelessWidget {
   }) {
     return Column(
           children: [
-          Icon(icon,size: r.sp(6),color: Colors.white,),
+          Icon(icon,size: r.sp(7),color: Colors.white,),
              Text(
               text,
               style: textStyle.heading2.copyWith(
                 color: Colors.white,
-                fontSize: r.sp(4)),
+                fontSize: r.sp(3.5)),
             ),
           ],
         );
@@ -104,6 +110,18 @@ class AttendanceReportWidget extends StatelessWidget {
       create: (context) => sl<StudentAttendanceCubit>()..loadStats(groupId),
       child: const StudentAttendanceStatsWidget(),
     );
+  }
+}
+
+class PaymentReportWidget extends StatelessWidget {
+  const PaymentReportWidget({super.key, required this.groupId, required this.r});
+
+  final String groupId;
+  final Responsive r;
+
+  @override
+  Widget build(BuildContext context) {
+    return GroupPaymentsScreen(groupId: groupId, );
   }
 }
 
@@ -144,3 +162,4 @@ final Responsive r;
     );
   }
 }
+
