@@ -1,5 +1,4 @@
-
- import 'dart:developer';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +7,7 @@ import 'package:taba3ni/core/constants/app_colors.dart';
 import 'package:taba3ni/core/constants/app_size.dart';
 import 'package:taba3ni/core/constants/app_text_styles.dart';
 import 'package:taba3ni/features/add_group/presentation/cubit/add_group_cubit.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 import 'package:taba3ni/features/shaerd_widgets/custom_button.dart';
 import 'package:taba3ni/features/shaerd_widgets/custom_top_bar.dart';
 import 'package:taba3ni/features/shaerd_widgets/gradiant_text_field.dart';
@@ -18,12 +18,14 @@ class AddGroupPageView extends StatelessWidget {
     super.key,
     required this.r,
     required this.textStyle,
-    required this.cubit, 
+    required this.cubit,
+    this.group,
   });
 
   final Responsive r;
   final AppTextStyles textStyle;
   final AddGroupCubit cubit;
+  final GroupEntity? group;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class AddGroupPageView extends StatelessWidget {
               onPressed: () => context.pop(true),
             ),
           ),
-    
+
           AppSize.verticalSpace(r.hp(2)),
           Text(
             "قم بإنشاء مجموعة جديدة للطلاب وتحديد المواعيد من هنا",
@@ -54,7 +56,7 @@ class AddGroupPageView extends StatelessWidget {
             ),
           ),
           AppSize.verticalSpace(r.hp(2)),
-    
+
           GradientTextField(
             controller: cubit.nameController,
             prefix: Icons.group_outlined,
@@ -78,14 +80,14 @@ class AddGroupPageView extends StatelessWidget {
               return null;
             },
           ),
-    
+
           AppSize.verticalSpace(r.hp(2)),
           const Text(
             'المرحلة الدراسية:',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
-           GradientDropdownField(
+          AppSize.verticalSpace(r.hp(2)),
+          GradientDropdownField(
             labelText: 'اختر المرحلة',
             value: cubit.selectedGradeArabic,
             items:
@@ -98,37 +100,59 @@ class AddGroupPageView extends StatelessWidget {
               log('Selected grade: ${cubit.selectedGradeEnglish}');
             },
           ),
-    
-          const SizedBox(height: 20),
+          AppSize.verticalSpace(r.hp(2)),
           const Text(
             'اختيار الأيام والمواعيد:',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8),
-          ...cubit.selectedDays.keys.map((day) {
-            final time = cubit.selectedDays[day];
-            return ListTile(
-              title: Text(day),
-              subtitle: Text(
-                time != null
-                    ? 'الساعة: ${time.format(context)}'
-                    : 'لم يتم اختيار الوقت',
-              ),
-              trailing: IconButton(
-                icon: const Icon(Icons.access_time),
-                onPressed: () => cubit.pickTime(day, context),
-              ),
-            );
-          }),
-          const SizedBox(height: 24),
+          AppSize.verticalSpace(r.hp(2)),
+
+        
+   CustomButton(
+            onPressed: () =>  cubit.showDayPicker(context),
+            text: 'إضافة يوم',
+          ),
+          AppSize.verticalSpace(r.hp(2)),
+          ValueListenableBuilder(
+            valueListenable: cubit.selectedDays,
+            builder: (context, selected, _) {
+              return Column(
+                children:
+                    selected.keys.map((day) {
+                      final time = selected[day];
+                      return ListTile(
+                        title: Text(day),
+                        subtitle: Text(
+                          time != null
+                              ? 'الساعة: ${time.format(context)}'
+                              : 'لم يتم اختيار الوقت',
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.access_time),
+                              onPressed: () => cubit.pickTime(day, context),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete, color: Colors.red),
+                              onPressed: () => cubit.removeDay(day),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+              );
+            },
+          ),
+          AppSize.verticalSpace(r.hp(2)),
+          Divider(color: AppColors.textSecondary),
           CustomButton(
-                            onPressed: () => cubit.submit(context),
-    
-  text: cubit.isEditMode ? 'تحديث المجموعة' : 'حفظ المجموعة',
-          ) 
+            onPressed: () => cubit.submit(context, group),
+            text: cubit.isEditMode ? 'تحديث المجموعة' : 'حفظ المجموعة',
+          ),
         ],
       ),
     );
   }
 }
- 

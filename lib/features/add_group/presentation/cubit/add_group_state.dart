@@ -37,3 +37,6 @@ class UpdateGroupError extends AddGroupState {
   @override
   List<Object?> get props => [error];
 }
+
+class AddDaySuccess extends AddGroupState {}
+class RemoveDaySuccess extends AddGroupState {}

@@ -19,7 +19,7 @@ class AddGroupPage extends StatelessWidget {
         body: SafeArea(
           child: ResponsiveWidget(
             builder: (context, r) {
-              return AddGroupBlocConsumer(r: r);
+              return AddGroupBlocConsumer(r: r,group: group);
             },
           ),
         ),

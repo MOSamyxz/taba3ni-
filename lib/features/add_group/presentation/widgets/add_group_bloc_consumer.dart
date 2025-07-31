@@ -5,11 +5,12 @@ import 'package:taba3ni/config/responsive/responsive.dart';
 import 'package:taba3ni/core/constants/app_text_styles.dart';
 import 'package:taba3ni/features/add_group/presentation/cubit/add_group_cubit.dart';
 import 'package:taba3ni/features/add_group/presentation/widgets/add_group_page_view.dart';
+import 'package:taba3ni/features/group_shared/domain/entity/group_entity.dart';
 
 class AddGroupBlocConsumer extends StatelessWidget {
-  const AddGroupBlocConsumer({super.key, required this.r});
+  const AddGroupBlocConsumer({super.key, required this.r, this.group});
   final Responsive r;
-
+final GroupEntity? group;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddGroupCubit, AddGroupState>(
@@ -29,9 +30,9 @@ class AddGroupBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        final cubit = context.read<AddGroupCubit>();
+        final cubit = context.watch<AddGroupCubit>();
         var textStyle = AppTextStyles(context);
-        return AddGroupPageView(r: r, textStyle: textStyle, cubit: cubit);
+        return AddGroupPageView(r: r, textStyle: textStyle, cubit: cubit,group:  group);
       },
     );
   }
